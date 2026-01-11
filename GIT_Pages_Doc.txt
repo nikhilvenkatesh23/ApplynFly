@@ -1,0 +1,5 @@
+1. Create a TXT record in your DNS configuration for the following hostname: _github-pages-challenge-nikhilvenkatesh23.applynfly.in
+2. Use this code for the value of the TXT record: b99f7df2b54e6d3f0bb398912ed219
+3. Wait until your DNS configuration changes. This could take up to 24 hours to propagate.
+
+ Required for your site because you are using the default domain (nikhilvenkatesh23.github.io)
