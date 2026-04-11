@@ -1,0 +1,91 @@
+Create a premium, modern, high-end poster for an overseas education consultancy brand named "ApplyNFly".
+
+Design style:
+- Corporate, minimal, premium startup aesthetic
+- Blue and white color theme with gradient (deep navy to royal blue)
+- Clean layout with strong hierarchy
+- Glassmorphism card (semi-transparent white box with blur and soft shadow)
+- Subtle world map in background
+- Airplane flying with a smooth curved trail to represent global education
+
+Top Section:
+- Place the logo text "ApplyNFly" in bold modern font
+- Add a small graduation cap integrated into the logo
+- Add a small tagline below: "Trusted Study Abroad Partner"
+
+Main Headline (center, bold, large):
+"Launch Your Global Future"
+
+Subheadline:
+"Study Abroad Made Simple"
+
+Middle Section (inside a glassmorphism card):
+Title: "Our Core Services"
+
+Organize content into 2 columns:
+
+Left Column:
+Heading: "Study Abroad Guidance"
+- Career Counselling
+- University Selection
+- Admissions
+
+Heading: "Documentation & Visa"
+- Documentation Support
+- Visa Processing
+- Pre-Departure Briefing
+
+Right Column:
+Heading: "Financial Support"
+- Scholarships
+- Education Loans
+- Forex Services
+
+Heading: "Student Support"
+- Accommodation Assistance
+- Post-Arrival Support
+
+Lower Section:
+- Add a row of country flags/icons: USA, UK, Canada, Germany, Australia, France, Singapore, New Zealand
+- Text below: "Top Study Destinations"
+
+Add a strong statement:
+"From Application to Arrival — We Handle Everything"
+
+Bottom CTA Section:
+- Highlighted box with:
+"Start Your Journey Today"
+"Talk to an Expert Now"
+"Call / WhatsApp: +91 7603975447"
+"www.applynfly.in"
+
+Design details:
+- Use modern fonts like Poppins or Montserrat
+- Use consistent icon style (minimal line icons)
+- Add soft shadows and smooth spacing
+- Maintain high readability and premium feel
+- Avoid clutter, keep it elegant and clean
+
+Output:
+- Vertical poster (4:5 or A4 ratio)
+- High resolution (4K quality)
+- Professional branding suitable for Instagram and print
+
+
+
+
+
+final prompt 
+
+
+The Master Prompt
+A premium, modern vertical poster for an overseas education consultancy named "ApplyNFly". The design features a corporate "startup" aesthetic with a deep navy to royal blue gradient background. Top section: Bold logo text "ApplyNFly" with a small graduation cap integrated, and tagline "Trusted Study Abroad Partner" below it. An airplane icon flies from the left with a smooth, curved blue trail arching over the center. Main Headline: "Launch Your Global Future" in large, bold sans-serif font, followed by subheadline "Study Abroad Made Simple." Middle section: A prominent "Glassmorphism" card (semi-transparent white box with heavy background blur and soft drop shadow) titled "Our Core Services" containing two columns of text. Left column includes "Study Abroad Guidance" and "Documentation & Visa" with bullet points. Right column includes "Financial Support" and "Student Support" with bullet points. Lower section: A row of circular country flags (USA, UK, Canada, Germany, Australia, France, Singapore, NZ) above the text "Top Study Destinations". Footer: A strong statement "From Application to Arrival — We Handle Everything" and a highlighted bottom CTA box with the text "Start Your Journey Today", "Talk to an Expert Now", and contact details including "+91 7603975447" and "www.applynfly.in". Professional 4K quality, clean layout, Montserrat or Poppins typography, minimal line icons, high-end branding style.
+
+Tips for "Exact" Replication:
+Text Rendering: While modern models (like Gemini 3 Flash or Midjourney v6) are great at text, they can still make typos. You may need to run the prompt 2–3 times to get every word spelled correctly.
+
+Aspect Ratio: If using Midjourney, add --ar 4:5 to the end of the prompt.
+
+The "Glass" Effect: The key term is "Glassmorphism". If the box isn't transparent enough, emphasize "frosted glass effect with background blur."
+
+Flag Row: If the flags come out messy, you can edit that specific area or request "clean, flat circular flag icons."
