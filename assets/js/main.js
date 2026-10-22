@@ -1,10 +1,5 @@
-/**
-* Template Name: BizLand
-* Updated: Mar 10 2023 with Bootstrap v5.2.3
-* Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
+const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL';
+
 (function() {
   "use strict";
 
@@ -125,16 +120,6 @@
   })
 
   /**
-   * Mobile nav dropdowns activate
-   */
-  on('click', '.navbar .dropdown > a', function(e) {
-    if (select('#navbar').classList.contains('navbar-mobile')) {
-      e.preventDefault()
-      this.nextElementSibling.classList.toggle('dropdown-active')
-    }
-  }, true)
-
-  /**
    * Scrool with ofset on links with a class name .scrollto
    */
   on('click', '.scrollto', function(e) {
@@ -174,102 +159,6 @@
   }
 
   /**
-   * Initiate glightbox
-   */
-  const glightbox = GLightbox({
-    selector: '.glightbox'
-  });
-
-  /**
-   * Skills animation
-   */
-  let skilsContent = select('.skills-content');
-  if (skilsContent) {
-    new Waypoint({
-      element: skilsContent,
-      offset: '80%',
-      handler: function(direction) {
-        let progress = select('.progress .progress-bar', true);
-        progress.forEach((el) => {
-          el.style.width = el.getAttribute('aria-valuenow') + '%'
-        });
-      }
-    })
-  }
-
-  /**
-   * Testimonials slider
-   */
-  new Swiper('.testimonials-slider', {
-    speed: 600,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    slidesPerView: 'auto',
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    }
-  });
-
-  /**
-   * Porfolio isotope and filter
-   */
-  window.addEventListener('load', () => {
-    let portfolioContainer = select('.portfolio-container');
-    if (portfolioContainer) {
-      let portfolioIsotope = new Isotope(portfolioContainer, {
-        itemSelector: '.portfolio-item'
-      });
-
-      let portfolioFilters = select('#portfolio-flters li', true);
-
-      on('click', '#portfolio-flters li', function(e) {
-        e.preventDefault();
-        portfolioFilters.forEach(function(el) {
-          el.classList.remove('filter-active');
-        });
-        this.classList.add('filter-active');
-
-        portfolioIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
-        portfolioIsotope.on('arrangeComplete', function() {
-          AOS.refresh()
-        });
-      }, true);
-    }
-
-  });
-
-  /**
-   * Initiate portfolio lightbox 
-   */
-  const portfolioLightbox = GLightbox({
-    selector: '.portfolio-lightbox'
-  });
-
-  /**
-   * Portfolio details slider
-   */
-  new Swiper('.portfolio-details-slider', {
-    speed: 400,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    }
-  });
-
-  /**
    * Animation on scroll
    */
   window.addEventListener('load', () => {
@@ -281,9 +170,173 @@
     })
   });
 
-  /**
-   * Initiate Pure Counter 
-   */
-  new PureCounter();
+  const contactForm = select('.contact-form');
+  if (contactForm) {
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const loadingMessage = contactForm.querySelector('.loading');
+    const errorMessage = contactForm.querySelector('.error-message');
+    const sentMessage = contactForm.querySelector('.sent-message');
+    const honeypot = contactForm.elements.namedItem('botcheck');
+
+    contactForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (!contactForm.checkValidity()) {
+        contactForm.reportValidity();
+        return;
+      }
+
+      const formData = new FormData(contactForm);
+      const fieldNames = ['name', 'email', 'subject', 'message'];
+      const hasBlankField = fieldNames.some((name) => !String(formData.get(name) || '').trim());
+      const hasInvalidEmail = !contactForm.elements.namedItem('email').validity.valid;
+
+      errorMessage.classList.remove('d-block');
+      sentMessage.classList.remove('d-block');
+      if (hasBlankField || hasInvalidEmail) {
+        errorMessage.textContent = 'Please complete all fields with valid information.';
+        errorMessage.classList.add('d-block');
+        return;
+      }
+
+      if (honeypot.checked) {
+        errorMessage.textContent = 'Unable to submit your message. Please try again.';
+        errorMessage.classList.add('d-block');
+        return;
+      }
+
+      fieldNames.forEach((name) => formData.set(name, String(formData.get(name)).trim()));
+      const payload = Object.fromEntries(formData.entries());
+      submitButton.disabled = true;
+      submitButton.setAttribute('aria-busy', 'true');
+      loadingMessage.classList.add('d-block');
+
+      try {
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          throw new Error(result.message || 'We could not send your message. Please try again.');
+        }
+
+        contactForm.reset();
+        sentMessage.classList.add('d-block');
+      } catch (error) {
+        errorMessage.textContent = error.message || 'We could not send your message. Please try again.';
+        errorMessage.classList.add('d-block');
+      } finally {
+        loadingMessage.classList.remove('d-block');
+        submitButton.disabled = false;
+        submitButton.removeAttribute('aria-busy');
+      }
+    });
+  }
+
+  const evaluationForm = select('.evaluation-form');
+  if (evaluationForm) {
+    const submitButton = evaluationForm.querySelector('button[type="submit"]');
+    const loadingMessage = evaluationForm.querySelector('.loading');
+    const errorMessage = evaluationForm.querySelector('.error-message');
+    const sentMessage = evaluationForm.querySelector('.sent-message');
+    const countryCheckboxes = [...evaluationForm.querySelectorAll('input[name="preferred_countries"]')];
+    const phoneInput = evaluationForm.elements.namedItem('phone');
+    const englishStatus = evaluationForm.elements.namedItem('english_test_status');
+    const englishScore = evaluationForm.elements.namedItem('english_test_score');
+    const honeypot = evaluationForm.elements.namedItem('website');
+    const updatePhoneValidity = () => {
+      const phoneDigits = phoneInput.value.replace(/\D/g, '');
+      const phoneIsValid = /^[0-9+() -]{8,20}$/.test(phoneInput.value.trim()) &&
+        phoneDigits.length >= 8 && phoneDigits.length <= 15;
+      phoneInput.setCustomValidity(
+        phoneInput.value && !phoneIsValid ? 'Enter a valid phone number.' : ''
+      );
+    };
+    const updateCountryValidity = () => {
+      const hasCountry = countryCheckboxes.some((checkbox) => checkbox.checked);
+      countryCheckboxes[0].setCustomValidity(hasCountry ? '' : 'Please choose at least one preferred country.');
+    };
+    const updateEnglishScoreValidity = () => {
+      const required = englishStatus.value !== '' && englishStatus.value !== 'Not taken yet';
+      englishScore.required = required;
+      englishScore.setCustomValidity(
+        required && !englishScore.value.trim() ? 'Please enter your English test score.' : ''
+      );
+    };
+
+    updateCountryValidity();
+    updateEnglishScoreValidity();
+    phoneInput.addEventListener('input', updatePhoneValidity);
+    countryCheckboxes.forEach((checkbox) => checkbox.addEventListener('change', updateCountryValidity));
+    englishStatus.addEventListener('change', updateEnglishScoreValidity);
+    englishScore.addEventListener('input', updateEnglishScoreValidity);
+
+    evaluationForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      updateCountryValidity();
+      updateEnglishScoreValidity();
+      updatePhoneValidity();
+
+      if (!evaluationForm.checkValidity()) {
+        evaluationForm.reportValidity();
+        return;
+      }
+
+      errorMessage.classList.remove('d-block');
+      sentMessage.classList.remove('d-block');
+
+      if (honeypot.value.trim()) {
+        errorMessage.textContent = 'Unable to submit your evaluation. Please try again.';
+        errorMessage.classList.add('d-block');
+        return;
+      }
+
+      if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_WEB_APP_URL') {
+        errorMessage.textContent = 'The evaluation form is not configured yet. Please contact us directly.';
+        errorMessage.classList.add('d-block');
+        return;
+      }
+
+      const formData = new FormData(evaluationForm);
+      const payload = Object.fromEntries(formData.entries());
+      payload.preferred_countries = formData.getAll('preferred_countries');
+      submitButton.disabled = true;
+      submitButton.setAttribute('aria-busy', 'true');
+      loadingMessage.classList.add('d-block');
+
+      try {
+        const response = await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify(payload)
+        });
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          throw new Error(result.message || 'We could not submit your evaluation. Please try again.');
+        }
+
+        evaluationForm.reset();
+        updateCountryValidity();
+        updateEnglishScoreValidity();
+        sentMessage.classList.add('d-block');
+      } catch (error) {
+        errorMessage.textContent = error.message || 'We could not submit your evaluation. Please try again.';
+        errorMessage.classList.add('d-block');
+      } finally {
+        loadingMessage.classList.remove('d-block');
+        submitButton.disabled = false;
+        submitButton.removeAttribute('aria-busy');
+      }
+    });
+  }
 
 })()
