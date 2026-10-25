@@ -1,4 +1,4 @@
-const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbykGqSllTlx4Fy1ufxYEuC9kubWlxyaKtiGRp4DgzPnvmByYLR1EcCayEjXTEjBD-uo/exec';
 
 (function() {
   "use strict";
