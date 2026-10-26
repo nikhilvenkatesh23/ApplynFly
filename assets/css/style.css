@@ -1678,45 +1678,97 @@ section {
 .destinations .destination-card {
   width: 100%;
   height: 100%;
+  min-height: 100%;
   margin-bottom: 24px;
   padding: 24px;
-  background: var(--color-surface);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.9)), url("../img/hero-bg.webp") center / cover;
   border: 1px solid var(--color-border);
-  border-radius: 6px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.destinations .destination-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--brand-gradient);
+  z-index: -1;
 }
 
 .destination-card h4 {
+  display: block;
+  position: relative;
+  min-height: 52px;
+  padding: 8px 42px 0 0;
   color: var(--brand-blue);
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
+}
+
+.destination-flag {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  z-index: -1;
+  opacity: 0.2;
+  font-size: 48px;
+  line-height: 1;
+  filter: saturate(0.75);
+  pointer-events: none;
 }
 
 .destination-card ul {
-  min-height: 145px;
-  padding-left: 20px;
+  min-height: 155px;
+  padding: 0;
+  list-style: none;
   color: var(--color-muted);
   font-size: 14px;
 }
 
 .destination-card li {
+  position: relative;
+  padding-left: 18px;
   margin-bottom: 10px;
+  line-height: 1.55;
+}
+
+.destination-card li::before {
+  content: "";
+  position: absolute;
+  top: 0.65em;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  background: var(--brand-blue);
+  border-radius: 50%;
 }
 
 .destination-card .destination-link {
-  display: inline-block;
-  padding: 8px 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 16px;
   color: var(--color-surface);
-  background: var(--brand-blue);
-  border-radius: 4px;
+  background: var(--brand-gradient);
+  border-radius: var(--radius-control);
   font-size: 14px;
-  transition: 0.3s;
+  font-weight: 500;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .destination-card .destination-link:hover {
-  background: var(--brand-blue-dark);
+  background: linear-gradient(120deg, var(--brand-blue-dark) 0%, var(--brand-blue) 100%);
   color: var(--color-surface);
+  box-shadow: 0 8px 18px rgba(24, 90, 219, 0.24);
+  transform: translateY(-2px);
 }
 
 .process-step {
@@ -1783,7 +1835,184 @@ section {
 }
 
 .student-stories {
+  background: var(--color-background);
+}
+
+.review-card {
+  min-height: 270px;
+  margin: 0 48px 54px;
+  padding: clamp(24px, 5vw, 40px);
   background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.review-summary-card {
+  height: 100%;
+  padding: 24px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.review-summary-card h4 {
+  margin-bottom: 14px;
+  color: var(--brand-navy);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.review-summary-card .review-stars {
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.review-summary-card .review-source {
+  margin-bottom: 14px;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+.review-story-card {
+  max-width: 820px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.review-story-card blockquote {
+  margin: 0 auto 24px;
+  color: var(--color-text);
+  font-size: 15px;
+  line-height: 1.8;
+  text-align: left;
+}
+
+.review-story-card blockquote p {
+  margin-bottom: 14px;
+}
+
+.review-story-card blockquote footer {
+  color: var(--brand-navy);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.review-story-card blockquote footer span {
+  color: var(--color-muted);
+  font-weight: 400;
+}
+
+.review-rating-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 620px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.review-rating-card h4 {
+  margin-bottom: 18px;
+  color: var(--brand-navy);
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.review-carousel {
+  padding-bottom: 24px;
+}
+
+.review-carousel .carousel-control-prev,
+.review-carousel .carousel-control-next {
+  width: 44px;
+  height: 44px;
+  top: 50%;
+  bottom: auto;
+  background: var(--brand-gradient);
+  border: 0;
+  border-radius: 50%;
+  opacity: 1;
+  transform: translateY(-50%);
+}
+
+.review-carousel .carousel-control-prev {
+  left: 0;
+}
+
+.review-carousel .carousel-control-next {
+  right: 0;
+}
+
+.review-carousel .carousel-indicators {
+  bottom: 0;
+  margin-bottom: 0;
+}
+
+.review-carousel .carousel-indicators [data-bs-target] {
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  background-color: var(--brand-blue);
+  border: 0;
+  border-radius: 50%;
+}
+
+.review-card .review-stars {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 0 0 12px;
+  color: #d99500;
+  font-size: 22px;
+}
+
+.review-summary-card .review-stars {
+  display: flex;
+  gap: 6px;
+  color: #d99500;
+  font-size: 22px;
+}
+
+.google-review-mark {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  color: #4285f4;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  font-size: 27px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.review-card .review-source {
+  margin-bottom: 18px;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+.review-card .review-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  color: #fff;
+  background: var(--brand-gradient);
+  border-radius: var(--radius-control);
+  box-shadow: 0 8px 18px rgba(24, 90, 219, 0.2);
+}
+
+.review-card .review-link:hover {
+  color: #fff;
+  background: linear-gradient(120deg, var(--brand-blue-dark) 0%, var(--brand-blue) 100%);
 }
 
 .evaluation .evaluation-form {
@@ -2202,6 +2431,25 @@ textarea {
   color: var(--brand-blue);
 }
 
+.navbar .evaluation-cta,
+.navbar .evaluation-cta:focus {
+  padding: 10px 16px;
+  color: #fff;
+  background: var(--brand-gradient);
+  border-radius: var(--radius-control);
+  box-shadow: 0 6px 16px rgba(24, 90, 219, 0.18);
+}
+
+.navbar .evaluation-cta:before {
+  display: none;
+}
+
+.navbar .evaluation-cta:hover,
+.navbar li:hover>.evaluation-cta {
+  color: #fff;
+  background: linear-gradient(120deg, var(--brand-blue-dark) 0%, var(--brand-blue) 100%);
+}
+
 .mobile-nav-toggle {
   color: var(--brand-navy);
 }
@@ -2219,6 +2467,24 @@ textarea {
 .navbar-mobile .active,
 .navbar-mobile li:hover>a {
   color: var(--brand-blue);
+}
+
+.navbar-mobile .evaluation-cta,
+.navbar-mobile .evaluation-cta:focus {
+  display: inline-flex;
+  margin: 8px 20px;
+  color: #fff;
+}
+
+@media (min-width: 992px) and (max-width: 1366px) {
+  .navbar>ul>li {
+    padding-left: 14px;
+  }
+
+  .navbar a,
+  .navbar a:focus {
+    font-size: 14px;
+  }
 }
 
 #hero:before {
@@ -2329,6 +2595,12 @@ textarea {
 .destination-card {
   border-color: var(--color-border) !important;
   border-radius: var(--radius-card) !important;
+}
+
+.destinations .destination-card {
+  background-image: linear-gradient(145deg, rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.9)), url("../img/hero-bg.webp");
+  background-position: center;
+  background-size: cover;
 }
 
 .destination-card .destination-link,
@@ -2472,5 +2744,26 @@ textarea {
 
   .legal-page {
     padding: 32px 0 48px;
+  }
+
+  .review-card {
+    margin-right: 38px;
+    margin-left: 38px;
+    padding: 22px 18px;
+  }
+
+  .review-story-card {
+    margin-right: 38px;
+    margin-left: 38px;
+  }
+
+  .review-carousel .carousel-control-prev,
+  .review-carousel .carousel-control-next {
+    width: 34px;
+    height: 34px;
+  }
+
+  .review-story-card blockquote {
+    font-size: 14px;
   }
 }
