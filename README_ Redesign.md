@@ -6,6 +6,7 @@ Static, mobile-friendly website for Apply n Fly, an overseas education consultan
 
 - Refreshed the brand styling, responsive navigation and ApplyNFly logo.
 - Added study destinations, process steps, FAQs and profile-evaluation/contact forms.
+- Added a dedicated shareable evaluation page at `profile-evaluation.html`; the homepage and footer link to it.
 - Added SEO metadata, structured data, sitemap and robots file; optimized site images as WebP.
 - Added draft Privacy Policy and Terms pages. **Have both reviewed before publishing.**
 - Removed unused template pages, images and vendor assets.
